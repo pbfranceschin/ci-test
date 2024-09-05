@@ -1,0 +1,29 @@
+name: Periodic API Fetch and Save
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour
+
+jobs:
+  fetch-and-save:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # Node 18 has native fetch support
+
+      - name: Fetch and save API responses
+        run: node api/fetchAndSave.js
+
+      - name: Commit and Push if Files Changed
+        run: |
+          git config --global user.email "github-actions@example.com"
+          git config --global user.name "GitHub Actions Bot"
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Update API responses [skip ci]"
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/your-username/your-repository.git
