@@ -26,4 +26,4 @@ jobs:
           git config --global user.name "GitHub Actions Bot"
           git add .
           git diff-index --quiet HEAD || git commit -m "Update API responses [skip ci]"
-          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/your-username/your-repository.git
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/pbfranceschin/ci-test.git
