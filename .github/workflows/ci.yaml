@@ -15,15 +15,17 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # Node 18 has native fetch support
+          node-version: '18'
 
       - name: Fetch and save API responses
         run: node api/fetchAndSave.js
 
       - name: Commit and Push if Files Changed
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}  # Use the fine-grained PAT stored in secrets
         run: |
-          git config --global user.email "pbfranceschin@gmail.com"
+          git config --global user.email "git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "GitHub Actions Bot"
           git add .
           git diff-index --quiet HEAD || git commit -m "Update API responses [skip ci]"
-          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/pbfranceschin/ci-test.git
+          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/your-username/your-repository.git
