@@ -1,8 +1,8 @@
 name: Periodic API Fetch and Save
-on:
-  schedule:
-    - cron: '0 18 * * 1'  # Runs every Monday at 18:00 UTC
-  workflow_dispatch:  # Allows manual triggers
+# on:
+#   schedule:
+#     - cron: '0 18 * * 1'  # Runs every Monday at 18:00 UTC
+#   workflow_dispatch:  # Allows manual triggers
 
 jobs:
   fetch-and-save:
